@@ -132,7 +132,7 @@ public speedoupdate()
 		veh = GetPlayerVehicleID(playerid);
 		model = GetVehicleModel(veh);
 		GetVehicleVelocity(veh, x, y, z);
-		speed = floatsqroot((x * x) + (y * y)) * 180.0;
+		speed = floatmul(floatsqroot(floatadd(floatmul(x, x), floatmul(y, y))), 180.0);
 		format(string, 4, "%.0f", speed);
 		PlayerTextDrawSetString(playerid, speedo[playerid], string);
 		ShowPlayerCircleProgress(playerid, floatround(speed / VEHICLE_TOP_SPEEDS[model - 400] * 100.0), 596.500244, 374.259460, 0x0388FCFF);

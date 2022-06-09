@@ -125,13 +125,14 @@ forward speedoupdate();
 
 public speedoupdate()
 {
-	new string[4], veh, Float:speed, model;
+	new string[4], veh, Float:speed, Float:x, Float:y, Float:z, model;
 	for (new playerid = GetPlayerPoolSize(); playerid > -1; playerid--)
 	{
 		if (!use_speedo[playerid] || GetPlayerState(playerid) != 2) continue;
 		veh = GetPlayerVehicleID(playerid);
 		model = GetVehicleModel(veh);
-		speed = GetVehicleSpeed(veh);
+		GetVehicleVelocity(veh, x, y, z);
+		speed = floatsqroot((x * x) + (y * y)) * 180.0;
 		format(string, 4, "%.0f", speed);
 		PlayerTextDrawSetString(playerid, speedo[playerid], string);
 		ShowPlayerCircleProgress(playerid, floatround(speed / VEHICLE_TOP_SPEEDS[model - 400] * 100.0), 596.500244, 374.259460, 0x0388FCFF);
